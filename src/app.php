@@ -3,16 +3,15 @@
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
+use Silex\Provider\ServiceControllerServiceProvider;
 
 $app = new Application();
 
-// Ajout des fournisseurs de services
+$app->register(new ServiceControllerServiceProvider());
 $app->register(new DoctrineServiceProvider());
 $app->register(new TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
-
-//Ajout des repository
-$app['repository.user'] = function ($app) {
-    return new App\Users\Repository\UserRepository($app['db']);
-};
+require 'Users/Config/dev.php';
+require 'Users/Config/dependency_injections.php';
+require 'Users/Config/routes.php';
