@@ -21,6 +21,11 @@ class UserService
         return $this->repo->getById($id);
     }
 
+    public function delete($id)
+    {
+        return $this->repo->delete($id);
+    }
+
     public function save($parameters)
     {
         if ($parameters['id']) {
